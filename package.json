@@ -5,6 +5,9 @@
   "main": "app.js",
   "author": "Popoy Vargas",
   "license": "MIT",
+  "scripts": {
+    "start": "node app.js"
+  },
   "dependencies": {
     "cors": "^2.8.5",
     "express": "^4.17.1",
