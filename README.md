@@ -1,4 +1,4 @@
-# CRM Client side API
+# Sandbox API
 
 Playground API for development purposes which includes an endpoint for `/users` at the minimum.
 
