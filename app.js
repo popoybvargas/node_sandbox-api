@@ -12,7 +12,7 @@ const errorHandler = require('./utils/errorHandler');
 
 // 3rd PARTY MIDDLEWARES
 // security
-app.use(helmet());
+// app.use(helmet()); // uncomment for production
 // handle CORS error
 app.use(cors());
 // MongoDB connection

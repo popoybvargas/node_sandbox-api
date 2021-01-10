@@ -1,0 +1,19 @@
+### user sign up endpoint
+POST http://localhost:3001/api/v1/users
+Content-Type: application/json
+
+{
+  "name": "Popoy Vargas",
+  "email": "popoyvargas@gmail.com",
+  "password": "password",
+  "role": "admin"
+}
+
+### user sign in endpoint
+POST http://localhost:3001/api/v1/users/login
+Content-Type: application/json
+
+{
+  "email": "popoyvargas@gmail.com",
+  "password": "password"
+}

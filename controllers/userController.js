@@ -17,3 +17,21 @@ exports.insertUser = userObj =>
       .catch(error => reject(error));
   });
 };
+
+exports.findUserByEmail = email =>
+{
+  return new Promise((resolve, reject) =>
+  {
+    User.findOne({ email }, (error, data) =>
+    {
+      if (error) reject(error);
+
+      resolve(data);
+    });
+  });
+};
+
+exports.comparePassword = (password, hashedPassword) =>
+{
+  return bcrypt.compare(password, hashedPassword);
+}
