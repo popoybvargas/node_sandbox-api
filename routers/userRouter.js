@@ -2,6 +2,8 @@ const { json } = require('express');
 const express = require('express');
 
 const controller = require('../controllers/userController');
+const { createAccessJWT, createRefreshJWT } = require('../utils/jwt');
+const { getJWT } = require('../utils/redis');
 
 const router = express.Router();
 
@@ -43,11 +45,16 @@ router.post('/login', async (req, res) =>
     {
       if (await controller.comparePassword(password, user.password))
       {
-        return res.json({ status: 'success', message: 'Logged in successfully!', data: user });
+        const accessJWT = await createAccessJWT({ id: user._id.toString() });
+
+        const refreshJWT = await createRefreshJWT({ id: user._id });
+        const updatedUser = await controller.storeRefreshJWT(user._id, refreshJWT);
+
+        return res.json({ status: 'success', message: 'Logged in successfully!', data: { accessJWT, refreshJWT, JWTFromRedis: await getJWT(accessJWT) }, updatedUser });
       }
     }
     
-    res.status(200).json({ status: 'failed', message: 'Email or password is incorrect' });
+    res.status(200).json({ status: 'failed', message: '💣 Email or password is incorrect!' });
   }
   catch (error)
   {

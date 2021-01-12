@@ -35,3 +35,14 @@ exports.comparePassword = (password, hashedPassword) =>
 {
   return bcrypt.compare(password, hashedPassword);
 }
+
+exports.storeRefreshJWT = (_id, token) =>
+{
+  return new Promise((resolve, reject) =>
+  {
+    User.findOneAndUpdate({ _id },
+    { refreshJWT: { token, addedAt: Date.now() } }, { new: true })
+    .then(data => resolve(data))
+    .catch(error => reject(error));
+  });
+};

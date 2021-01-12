@@ -32,6 +32,21 @@ const schema = new mongoose.Schema(
   {
     type: Boolean,
     default: true
+  },
+  refreshJWT:
+  {
+    token:
+    {
+      type: String,
+      maxlength: 500,
+      default: ''
+    },
+    addedAt:
+    {
+      type: Date,
+      required: true,
+      default: Date.now()
+    }
   }
 },
 {
